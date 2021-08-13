@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { IOrder } from '../types';
 import './style.scss';
+
+interface IBookRequestProps {
+  handler: (order: IOrder) => void;
+}
 
 const today = new Date().toISOString().substr(0, 10);
 
-export default function BookRequestFrom(): JSX.Element {
+export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
   const [name, setName] = useState('');
   const [date, setDate] = useState(today);
   const [office, setOffice] = useState('');
   const [pack, setPack] = useState(false);
   const [agree, setAgree] = useState(false);
   const [formValid, setFormValid] = useState(false);
+  const packCheckbox = useRef<HTMLInputElement>(null);
+  const agreeCheckbox = useRef<HTMLInputElement>(null);
 
   function isValid(): void {
     if (!name || !office || !agree) {
@@ -19,12 +26,36 @@ export default function BookRequestFrom(): JSX.Element {
     }
   }
 
+  function clear():void {
+    setName('');
+    setDate(today);
+    setOffice('');
+    setPack(false);
+    if (packCheckbox.current !== null) {
+      packCheckbox.current.checked = false;
+    }
+    setAgree(false);
+    if (agreeCheckbox.current !== null) {
+      agreeCheckbox.current.checked = false;
+    }
+  }
+
   useEffect(() => {
     isValid();
   });
 
   return (
-    <form className="request-book">
+    <form className="request-book" onSubmit={(e) => {
+      e.preventDefault();
+      const order = {
+        name,
+        date,
+        office,
+        pack,
+      };
+      props.handler(order);
+      clear();
+    }}>
       <h2>Request For The Interesting You Book Now!</h2>
       <fieldset className="request-form">
         <label htmlFor="book-name">
@@ -33,6 +64,7 @@ export default function BookRequestFrom(): JSX.Element {
             name="book-name"
             placeholder="Book name"
             id="book-name"
+            value={name}
             onInput = {
               (e) => {
                 setName(e.currentTarget.value);
@@ -58,6 +90,7 @@ export default function BookRequestFrom(): JSX.Element {
           <input list="office-list"
             placeholder="Office"
             id="office"
+            value={office}
             onInput = {
               (e) => {
                 setOffice(e.currentTarget.value);
@@ -76,6 +109,7 @@ export default function BookRequestFrom(): JSX.Element {
           <input type="checkbox"
             name="pack"
             id="pack"
+            ref={packCheckbox}
             onInput = {
               (e) => {
                 setPack(e.currentTarget.checked);
@@ -85,6 +119,7 @@ export default function BookRequestFrom(): JSX.Element {
         <label htmlFor="terms">
           <input type="checkbox"
             name="terms" id="terms"
+            ref={agreeCheckbox}
             onInput = {
               (e) => {
                 setAgree(e.currentTarget.checked);
