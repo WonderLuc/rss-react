@@ -1,7 +1,7 @@
 import React from 'react';
-import { IBook } from '../Books/mockData';
-import Details, { DetailType } from '../Details/Details';
+import Details from '../Details/Details';
 import Preview from '../Preview/Preview';
+import { DetailType, IBook } from '../types';
 import './style.scss';
 
 const price: DetailType = 'price';

@@ -10,7 +10,6 @@ export default function Orders(): JSX.Element {
 
   function addOrder(order: IOrder): void {
     setOrders([...orders, order]);
-    console.log(order);
   }
 
   return (
