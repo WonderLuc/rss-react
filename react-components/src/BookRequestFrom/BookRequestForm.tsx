@@ -56,11 +56,11 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
       props.handler(order);
       clear();
     }}>
-      <h2>Request For The Interesting You Book Now!</h2>
-      <fieldset className="request-form">
-        <label htmlFor="book-name">
+      <h2 className="request-book__title">Request For The Interesting You Book Now!</h2>
+      <fieldset className="request-book__form">
+        <label className="field" htmlFor="book-name">
           What book do you want?
-          <input type="text"
+          <input className="field__input" type="text"
             name="book-name"
             placeholder="Book name"
             id="book-name"
@@ -72,9 +72,9 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
             }
             required/>
         </label>
-        <label htmlFor="date">
+        <label className="field" htmlFor="date">
           Choose a comfortable date for getting a book
-          <input type="date"
+          <input className="field__input" type="date"
             name="date"
             id="date"
             onInput = {
@@ -85,9 +85,9 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
             min={date}
             value={date}/>
         </label>
-        <label htmlFor="office">
+        <label className="field" htmlFor="office">
           Choose a office:
-          <input list="office-list"
+          <input className="field__input" list="office-list"
             placeholder="Office"
             id="office"
             value={office}
@@ -104,9 +104,12 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
             <option>Houston</option>
           </datalist>
         </label>
-        <label htmlFor="pack">
+        <label className="field field_selector" htmlFor="pack">
           Pack a book
-          <input type="checkbox"
+          <div className={ `selector ${pack ? 'selector_active' : ''}` }>
+            <div className="selector__circle"></div>
+          </div>
+          <input className="field__input" type="checkbox"
             name="pack"
             id="pack"
             ref={packCheckbox}
@@ -116,8 +119,8 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
               }
             }/>
         </label>
-        <label htmlFor="terms">
-          <input type="checkbox"
+        <label className="field field_text-after field_checkbox"htmlFor="terms">
+          <input className="field__input" type="checkbox"
             name="terms" id="terms"
             ref={agreeCheckbox}
             onInput = {
@@ -128,8 +131,8 @@ export default function BookRequestFrom(props: IBookRequestProps): JSX.Element {
             required/>
           I have read and accepted the terms and conditions
         </label>
+        <button className="request-book__submit" disabled={!formValid}>Request</button>
       </fieldset>
-      <button disabled={!formValid}>Request</button>
     </form>
   );
 }
