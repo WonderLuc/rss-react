@@ -1,11 +1,11 @@
 import React from 'react';
-import { IBook } from '../Books/mockData';
+import { DetailType, IBook } from '../types';
 import './style.scss';
 
-export type DetailType = 'price' | 'comments' | 'likes';
-interface DetailsProps extends IBook{
+export interface DetailsProps extends IBook{
   detail: DetailType;
 }
+
 export default function Details(props: DetailsProps): JSX.Element {
   return (
     <figure className={props.detail}>
