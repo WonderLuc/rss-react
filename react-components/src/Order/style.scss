@@ -1,0 +1,27 @@
+.order{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 20px;
+  border: 2px solid;
+  border-radius: 20px;
+
+  &__id{
+    align-self: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+
+  &_packed{
+    background: linear-gradient(45deg, transparent 40%, #f5bc1b 80%);
+  }
+
+  &__pack{
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 40px;
+  }
+}

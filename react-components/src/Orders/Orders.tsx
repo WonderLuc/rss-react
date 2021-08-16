@@ -17,7 +17,7 @@ export default function Orders(): JSX.Element {
       <BookRequestFrom handler={addOrder} />
       <ul className="orders__list">
         {
-          orders.map((order, index) => <Order {...order} key={index + order.name}/>)
+          orders.map((order, index) => <Order {...order} key={index + order.name} id={index + 1}/>)
         }
       </ul>
     </section>

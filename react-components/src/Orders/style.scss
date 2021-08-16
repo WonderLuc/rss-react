@@ -1,0 +1,13 @@
+.orders__list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+@media screen and (max-width: 400px) {
+  .orders__list{
+    flex-direction: column;
+  }
+}

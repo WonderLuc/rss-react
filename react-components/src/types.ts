@@ -3,6 +3,7 @@ export interface IOrder {
   date: string;
   office: string;
   pack: boolean;
+  id?: number;
 }
 
 export interface IBook{
