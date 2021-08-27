@@ -4,25 +4,31 @@ import {
   Actions,
   ICard,
   IState,
+  UpdateAction,
 } from '../types';
 
-const initState: ICard [] = [{
-  name: 'Oldrik',
-  id: 1,
-  img: '',
-}];
+const initState: ICard [] = [];
 
 const CardsContext = React.createContext<IState | undefined>(undefined);
 
 function CardsReducer(state: ICard[], action: Action) {
   switch (action.type) {
     case Actions.CARDS_UPDATE:
-      return state;
+      return action.data;
     default:
       return state;
   }
 }
 
+// ACTIONS
+export function UpdateCardAction(data: ICard[]): UpdateAction {
+  return {
+    type: Actions.CARDS_UPDATE,
+    data,
+  };
+}
+
+// PROVIDER FOR COMPONENTS
 export function CardProvider({ children }: { children: JSX.Element }): JSX.Element {
   const [state, dispacth] = useReducer(CardsReducer, initState);
 
