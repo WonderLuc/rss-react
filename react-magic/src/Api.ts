@@ -12,7 +12,8 @@ export class Api implements IApi {
   constructor(url: string) {
     this.options = {
       page: 1,
-      pageSize: 20,
+      pageSize: 12,
+      contains: 'imageUrl',
     };
     this.url = url;
     this.isDownloaded = false;
@@ -47,7 +48,7 @@ export class Api implements IApi {
     keys.forEach((arr, index) => {
       const [key, value] = arr;
       str += `${key}=${value}`;
-      if (index > 0 && (index + 1) < keys.length) str += '&';
+      if ((index + 1) < keys.length) str += '&';
     });
     return str;
   }

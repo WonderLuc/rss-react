@@ -28,6 +28,7 @@ export interface IOptions {
   page: number;
   pageSize: number;
   name?: string;
+  contains?: string;
 }
 
 export interface IApi {
