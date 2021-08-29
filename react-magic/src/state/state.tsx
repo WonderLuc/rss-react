@@ -2,31 +2,45 @@ import React, { useContext, useReducer } from 'react';
 import {
   Action,
   Actions,
+  DownloadUpdateAction,
   ICard,
   IState,
+  IStateContext,
   UpdateAction,
 } from '../types';
 
-const initState: ICard [] = [];
+const initState: IState = {
+  cards: [],
+  isDownload: false,
+};
 
-const CardsContext = React.createContext<IState | undefined>(undefined);
+const CardsContext = React.createContext<IStateContext | undefined>(undefined);
 
-function CardsReducer(state: ICard[], action: Action) {
+function CardsReducer(state: IState, action: Action) {
   switch (action.type) {
     case Actions.CARDS_UPDATE:
-      return action.data;
+      return {...state , ...{cards: action.data}};
+    case Actions.DOWNLOAD_CHANGE:
+      return {...state, isDownload: action.data};
     default:
       return state;
   }
 }
 
 // ACTIONS
-export function UpdateCardAction(data: ICard[]): UpdateAction {
+export function UpdateCard(data: ICard[]): UpdateAction {
   return {
     type: Actions.CARDS_UPDATE,
     data,
   };
 }
+
+export function UpdateDownload(status: boolean): DownloadUpdateAction {
+  return {
+    type: Actions.DOWNLOAD_CHANGE,
+    data: status,
+  }
+} 
 
 // PROVIDER FOR COMPONENTS
 export function CardProvider({ children }: { children: JSX.Element }): JSX.Element {
@@ -39,7 +53,7 @@ export function CardProvider({ children }: { children: JSX.Element }): JSX.Eleme
   );
 }
 
-export function useCardsContext(): IState {
+export function useCardsContext(): IStateContext {
   const context = useContext(CardsContext);
 
   if (!context) throw new Error('');

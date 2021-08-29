@@ -6,22 +6,34 @@ export interface ICard {
 
 export interface ICardContext {
   cards: ICard[];
-  setCards: React.Dispatch<React.SetStateAction<ICard[]>>;
+  setCards: React.Dispatch<React.SetStateAction<IState>>;
 }
 
 export enum Actions {
   CARDS_UPDATE = 'CARDS_UPDATE',
+  DOWNLOAD_CHANGE = 'DOWNLOAD_CHANGE',
 }
+
 export interface UpdateAction {
   type: Actions.CARDS_UPDATE;
   data: ICard[];
 }
 
-export type Action = UpdateAction;
+export interface DownloadUpdateAction {
+  type: Actions.DOWNLOAD_CHANGE;
+  data: boolean;
+}
+
+export type Action = UpdateAction | DownloadUpdateAction;
+
+export interface IStateContext {
+  state: IState;
+  dispacth: React.Dispatch<Action>;
+}
 
 export interface IState {
-  state: ICard [];
-  dispacth: React.Dispatch<UpdateAction>;
+  cards: ICard [];
+  isDownload: boolean;
 }
 
 export interface IOptions {

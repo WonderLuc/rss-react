@@ -1,4 +1,5 @@
-import { IApi, ICard, IOptions } from './types';
+import { UpdateCard, UpdateDownload } from './state/state';
+import { IApi, ICard, IOptions, IStateContext } from './types';
 
 export class Api implements IApi {
   options: IOptions;
@@ -58,3 +59,10 @@ export class Api implements IApi {
 }
 
 export const api = new Api('https://api.magicthegathering.io/v1/cards');
+export async function requestCards(context: IStateContext, api: Api): Promise<void> {
+  context.dispacth(UpdateDownload(true));
+  await api.downolad();
+  context.dispacth(UpdateDownload(false));
+  context.dispacth(UpdateCard(api.cards));
+  
+}

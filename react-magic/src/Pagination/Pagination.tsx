@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { api } from '../Api';
+import { api, requestCards } from '../Api';
 import { useCardsContext } from '../state/state';
 import { Actions } from '../types';
 import './style.scss';
@@ -20,14 +20,8 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
       page: currentPage,
     });
     api.setStatus(false);
-    requestCards();
+    requestCards(context, api);
     setPage(currentPage);
-  }
-
-  async function requestCards(): Promise<void> {
-    api.setStatus(false);
-    await api.downolad();
-    context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
   }
 
   function changeCardsOnPage (e: React.ChangeEvent<HTMLInputElement>): void {
@@ -36,7 +30,7 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
     api.setOptions({
       pageSize: value,
     });
-    requestCards();
+    requestCards(context, api);
   }
 
   return (

@@ -1,17 +1,10 @@
 import React from 'react';
-import { api } from '../Api';
+import { api, requestCards } from '../Api';
 import { useCardsContext } from '../state/state';
-import { Actions } from '../types';
 import './style.scss';
 
 export default function Filters(): JSX.Element {
   const context = useCardsContext();
-  
-  async function requestCards(): Promise<void> {
-    api.setStatus(false);
-    await api.downolad();
-    context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
-  }
 
   function onSpecificColor(e: React.ChangeEvent<HTMLSelectElement>): void {
     const color = e.target.value;
@@ -25,7 +18,7 @@ export default function Filters(): JSX.Element {
         colors: color,
       });
     }
-    requestCards();
+    requestCards(context, api);
   }
   
   function onRandomCards(e: React.ChangeEvent<HTMLInputElement>) {
@@ -33,7 +26,7 @@ export default function Filters(): JSX.Element {
     api.setOptions({
       random: checked,
     });
-    requestCards();
+    requestCards(context, api);
   }
 
   function onManaCost(e: React.ChangeEvent<HTMLInputElement>) {
@@ -48,7 +41,7 @@ export default function Filters(): JSX.Element {
         cmc: cost,
       });
     }
-    requestCards();
+    requestCards(context, api);
   }
 
   return (

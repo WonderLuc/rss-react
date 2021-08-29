@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { api } from '../Api';
+import { api, requestCards } from '../Api';
 import Filters from '../Filters/Filters';
 import { useCardsContext } from '../state/state';
-import { Actions } from '../types';
 import './style.scss';
 
 export default function Search(): JSX.Element {
   const context = useCardsContext();
   const [name, setName] = useState('');
-
-  async function requestCards(): Promise<void> {
-    await api.downolad();
-    context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
-  }
 
   return (
     <article className="search">
@@ -31,7 +25,7 @@ export default function Search(): JSX.Element {
           else {
             if (api.options.name) delete api.options.name
           }
-          requestCards();
+          requestCards(context, api);
         }}>Search</button>
       </form>
       <Filters />

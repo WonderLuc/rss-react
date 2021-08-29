@@ -6,7 +6,6 @@ import './style.scss';
 export default function Field(): JSX.Element {
   return (
     <article className="field">
-      {/* Loader */}
       <Pagination>
         <Cards />
       </Pagination>
