@@ -52,8 +52,8 @@ export default function Filters(): JSX.Element {
   }
 
   return (
-    <section className="search">
-      <label htmlFor="color">
+    <section className="filters">
+      <label className="color" htmlFor="color">
        Specific color
         <select id="color" onChange={ (e) => onSpecificColor(e)}>
           <option value="none">None</option>
@@ -64,11 +64,11 @@ export default function Filters(): JSX.Element {
           <option value="white">White</option>
         </select>
       </label>
-      <label htmlFor="cmc">
+      <label className="cmc" htmlFor="cmc">
         Mana costs:
         <input id="cmc" type="number" min="0" onChange={(e) => onManaCost(e)}/>
       </label>
-      <label htmlFor="random">
+      <label className="random" htmlFor="random">
         Random Cards
         <input type="checkbox" id="random" onChange={(e) => onRandomCards(e)}/>
       </label>

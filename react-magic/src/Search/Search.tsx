@@ -17,8 +17,10 @@ export default function Search(): JSX.Element {
   return (
     <article className="search">
       <form className="search__form">
-        <img className="search__icon" src="" alt="search icon" />
-        <input className="search__input" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+        <div className="search-bar">
+          <img className="search-bar__icon" src="./search.png" alt="search icon" />
+          <input className="search-bar__input" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+        </div>
         <button className="search__btn" onClick={(e) => {
           e.preventDefault();
           if (name) {

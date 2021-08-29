@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { api } from '../Api';
 import { useCardsContext } from '../state/state';
 import { Actions } from '../types';
+import './style.scss';
 
 interface IPagainationProps {
   children: JSX.Element;
@@ -40,7 +41,7 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
 
   return (
     <div className="pagination">
-      <label htmlFor="pageSize">
+      <label className="pagination__pageSize" htmlFor="pageSize">
         Cards on page
         <input type="number" max="100" min="10" id="pageSize"
           defaultValue={api.options.pageSize}
@@ -52,10 +53,12 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
           }
           />
       </label>
+
       { props.children }
+
       <div className="page-counter">
         <button className="page-counter__prev" onClick={ (e) => flipPage(e, -1) }>Previous Page</button>
-        <p>{ page }</p>
+        <p className="page-counter__number">{ page }</p>
         <button className="page-counter__next" onClick={ (e) => flipPage(e, 1) }>Next Page</button>
       </div>
     </div>
