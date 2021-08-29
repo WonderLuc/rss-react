@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { api } from '../Api';
 import Card from '../Card/Card';
-import { OnlyCardWithImage } from '../Card/util';
 import { useCardsContext } from '../state/state';
 import { Actions } from '../types';
 import './style.scss';
@@ -11,7 +10,7 @@ export default function Cards(): JSX.Element {
 
   async function requestCards(): Promise<void> {
     await api.downolad();
-    context.dispacth({ type: Actions.CARDS_UPDATE, data: OnlyCardWithImage(api.cards) });
+    context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
   }
 
   useEffect(() => {
