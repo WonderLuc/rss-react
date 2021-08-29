@@ -37,6 +37,9 @@ export class Api implements IApi {
         this.setStatus(true);
         this.cards = res.cards;
       }
+      else if (req.status === 500) {
+        this.downolad();
+      }
     } catch (err) {
       console.log(`We have a problem with - ${err}`);
     }

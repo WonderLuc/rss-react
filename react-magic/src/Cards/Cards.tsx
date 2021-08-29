@@ -20,7 +20,7 @@ export default function Cards(): JSX.Element {
   });
 
   return (
-    <section className="Cards">
+    <section className="cards">
       {context.state.length ? context.state.map((card) => <Card {...card} key={card.id} />) : ''}
       {!context.state.length && <h2>Sorry, there is no cards...</h2>}
     </section>

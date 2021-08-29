@@ -25,10 +25,13 @@ export interface IState {
 }
 
 export interface IOptions {
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
   name?: string;
   contains?: string;
+  colors?: string;
+  random?: boolean;
+  cmc?: number;
 }
 
 export interface IApi {
