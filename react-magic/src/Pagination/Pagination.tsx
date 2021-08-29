@@ -24,6 +24,7 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
   }
 
   async function requestCards(): Promise<void> {
+    api.setStatus(false);
     await api.downolad();
     context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
   }

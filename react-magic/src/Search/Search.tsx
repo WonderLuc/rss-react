@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { api } from '../Api';
 import Filters from '../Filters/Filters';
 import { useCardsContext } from '../state/state';
@@ -7,6 +7,7 @@ import './style.scss';
 
 export default function Search(): JSX.Element {
   const context = useCardsContext();
+  const [name, setName] = useState('');
 
   async function requestCards(): Promise<void> {
     await api.downolad();
@@ -15,12 +16,22 @@ export default function Search(): JSX.Element {
 
   return (
     <article className="search">
-      <img className="search__icon" src="" alt="search icon" />
-      <input className="search__input" type="text"/>
-      <button className="search__btn" onClick={(e) => {
-        e.preventDefault();
-        requestCards();
-      }}>Search</button>
+      <form className="search__form">
+        <img className="search__icon" src="" alt="search icon" />
+        <input className="search__input" type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+        <button className="search__btn" onClick={(e) => {
+          e.preventDefault();
+          if (name) {
+            api.setOptions({
+              name
+            });
+          }
+          else {
+            if (api.options.name) delete api.options.name
+          }
+          requestCards();
+        }}>Search</button>
+      </form>
       <Filters />
     </article>
   );

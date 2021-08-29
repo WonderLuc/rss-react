@@ -8,6 +8,7 @@ export default function Filters(): JSX.Element {
   const context = useCardsContext();
   
   async function requestCards(): Promise<void> {
+    api.setStatus(false);
     await api.downolad();
     context.dispacth({ type: Actions.CARDS_UPDATE, data: api.cards });
   }
