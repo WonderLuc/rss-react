@@ -19,9 +19,9 @@ const CardsContext = React.createContext<IStateContext | undefined>(undefined);
 function CardsReducer(state: IState, action: Action) {
   switch (action.type) {
     case Actions.CARDS_UPDATE:
-      return {...state , ...{cards: action.data}};
+      return { ...state, ...{ cards: action.data } };
     case Actions.DOWNLOAD_CHANGE:
-      return {...state, isDownload: action.data};
+      return { ...state, isDownload: action.data };
     default:
       return state;
   }
@@ -39,8 +39,8 @@ export function UpdateDownload(status: boolean): DownloadUpdateAction {
   return {
     type: Actions.DOWNLOAD_CHANGE,
     data: status,
-  }
-} 
+  };
+}
 
 // PROVIDER FOR COMPONENTS
 export function CardProvider({ children }: { children: JSX.Element }): JSX.Element {

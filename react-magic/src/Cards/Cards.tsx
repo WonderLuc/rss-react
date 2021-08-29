@@ -8,7 +8,6 @@ import './style.scss';
 export default function Cards(): JSX.Element {
   const context = useCardsContext();
 
-
   useEffect(() => {
     requestCards(context, api);
   }, []);

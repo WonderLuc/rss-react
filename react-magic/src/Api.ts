@@ -1,5 +1,7 @@
 import { UpdateCard, UpdateDownload } from './state/state';
-import { IApi, ICard, IOptions, IStateContext } from './types';
+import {
+  IApi, ICard, IOptions, IStateContext,
+} from './types';
 
 export class Api implements IApi {
   options: IOptions;
@@ -37,8 +39,7 @@ export class Api implements IApi {
         const res = await req.json();
         this.setStatus(true);
         this.cards = res.cards;
-      }
-      else if (req.status === 500) {
+      } else if (req.status === 500) {
         this.downolad();
       }
     } catch (err) {
@@ -59,10 +60,9 @@ export class Api implements IApi {
 }
 
 export const api = new Api('https://api.magicthegathering.io/v1/cards');
-export async function requestCards(context: IStateContext, api: Api): Promise<void> {
+export async function requestCards(context: IStateContext, apiParam: Api): Promise<void> {
   context.dispacth(UpdateDownload(true));
-  await api.downolad();
+  await apiParam.downolad();
   context.dispacth(UpdateDownload(false));
   context.dispacth(UpdateCard(api.cards));
-  
 }

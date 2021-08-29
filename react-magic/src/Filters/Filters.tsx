@@ -8,21 +8,20 @@ export default function Filters(): JSX.Element {
 
   function onSpecificColor(e: React.ChangeEvent<HTMLSelectElement>): void {
     const color = e.target.value;
-    if (color == 'none') {
+    if (color === 'none') {
       api.setOptions({
         colors: '',
       });
-    }
-    else {
+    } else {
       api.setOptions({
         colors: color,
       });
     }
     requestCards(context, api);
   }
-  
+
   function onRandomCards(e: React.ChangeEvent<HTMLInputElement>) {
-    const checked = e.target.checked;
+    const { checked } = e.target;
     api.setOptions({
       random: checked,
     });
@@ -30,13 +29,12 @@ export default function Filters(): JSX.Element {
   }
 
   function onManaCost(e: React.ChangeEvent<HTMLInputElement>) {
-    const cost = parseInt(e.target.value);
+    const cost = parseInt(e.target.value, 10);
     if (!cost || cost < 0) {
       if (api.options.cmc) {
         delete api.options.cmc;
       }
-    }
-    else {
+    } else {
       api.setOptions({
         cmc: cost,
       });

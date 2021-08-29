@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { api, requestCards } from '../Api';
 import { useCardsContext } from '../state/state';
-import { Actions } from '../types';
 import './style.scss';
 
 interface IPagainationProps {
@@ -12,10 +11,10 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
   const [page, setPage] = useState(1);
   const context = useCardsContext();
 
-  function flipPage (e: React.MouseEvent<HTMLButtonElement>, n: number): void {
+  function flipPage(e: React.MouseEvent<HTMLButtonElement>, n: number): void {
     e.preventDefault();
     const currentPage = page + n;
-    if (currentPage < 1 ) return;
+    if (currentPage < 1) return;
     api.setOptions({
       page: currentPage,
     });
@@ -24,8 +23,8 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
     setPage(currentPage);
   }
 
-  function changeCardsOnPage (e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = parseInt(e.target.value);
+  function changeCardsOnPage(e: React.ChangeEvent<HTMLInputElement>): void {
+    const value = parseInt(e.target.value, 10);
     if (!value || value < 12 || value > 100) return;
     api.setOptions({
       pageSize: value,
@@ -45,7 +44,7 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
               changeCardsOnPage(e);
             }
           }
-          />
+        />
       </label>
 
       { props.children }

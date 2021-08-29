@@ -19,12 +19,9 @@ export default function Search(): JSX.Element {
           e.preventDefault();
           if (name) {
             api.setOptions({
-              name
+              name,
             });
-          }
-          else {
-            if (api.options.name) delete api.options.name
-          }
+          } else if (api.options.name) delete api.options.name;
           requestCards(context, api);
         }}>Search</button>
       </form>
