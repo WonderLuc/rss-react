@@ -1,0 +1,116 @@
+.card-detail{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #242121 70%, yellowgreen 70%);
+}
+
+.detail{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+
+    &__name{
+      width: 100%;
+      padding: 20px 0;
+      text-align: center;
+      background: #242121;
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    &__card{
+      margin: 0 20px;
+    }
+
+    &__artist{
+      text-align: center;
+      font-family: fantasy;
+      text-transform: uppercase;
+      font-weight: normal;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      color: #616161;
+
+      span{
+        position: relative;
+        bottom: 1px;
+        padding-left: 5px;
+        font-family: sans-serif;
+        color: white;
+        text-transform: capitalize;
+      }
+    }
+}
+
+.detail-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 50px 0;
+}
+
+.info{
+    display: flex;
+    padding-top: 20px;
+}
+
+.fields{
+  padding: 20px;
+  color: white;
+}
+
+.field-line{
+  margin: 15px 0;
+
+  &__header{
+    font-family: fantasy;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: #807e7e;
+  }
+
+  &__text{
+    margin-top: 5px;
+  }
+
+  &__mana{
+    display: flex;
+    margin-top: 5px;
+  }
+}
+
+.mana{
+  margin-right: 5px;
+  width: 25px;
+
+  &_number{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background: gray;
+    color: black;
+  }
+}
+
+.textblock{
+  max-width: 300px;
+  padding: 15px;
+  border: 1px solid;
+  align-self: center;
+  border-radius: 5px;
+  line-height: 1.4rem;
+  color: white;
+
+  p{
+    margin: 10px 0;
+  }
+}

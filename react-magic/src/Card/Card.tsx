@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { ICard } from '../types';
 import './style.scss';
 
@@ -7,7 +8,7 @@ export default function Card(props: ICard): JSX.Element {
     <figure className="card">
       <img src={props.imageUrl} alt={props.name} className="card__image" />
       <figcaption className="card__caption">
-        <h4 className="caption__name">{props.name}</h4>
+        <NavLink to={`/details/${props.id}`} className="caption__name">{props.name}</NavLink>
       </figcaption>
     </figure>
   );
