@@ -1,7 +1,7 @@
 export interface ICard {
   name: string;
   imageUrl: string;
-  id: number;
+  id: string;
 }
 
 export interface ICardContext {
@@ -53,4 +53,16 @@ export interface IApi {
   downolad: () => void;
   setOptions: (options: IOptions) => void;
   setStatus: (status: boolean) => void;
+}
+
+export interface ICardInfo {
+  name?: string;
+  id?: string;
+  artist?: string;
+  manaCost?: string;
+  type?: string;
+  rarity?: string;
+  text?: string;
+  setName?: string;
+  imageUrl?: string;
 }
