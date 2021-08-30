@@ -7,9 +7,9 @@ export default function Card(props: ICard): JSX.Element {
   return (
     <figure className="card">
       <img src={props.imageUrl} alt={props.name} className="card__image" />
-      <figcaption className="card__caption">
-        <NavLink to={`/details/${props.id}`} className="caption__name">{props.name}</NavLink>
-      </figcaption>
+      <NavLink to={`/details/${props.id}`} className="card__caption">
+        <div className="caption__name">{props.name}</div>
+      </NavLink>
     </figure>
   );
 }
