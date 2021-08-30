@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import About from '../About/About';
 import Header from '../Header/Header';
 import Home from '../Home/Home';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { CardProvider } from '../state/state';
 import './style.scss';
 
@@ -21,7 +22,7 @@ export default function App(): JSX.Element {
                 <About />
               </Route>
               <Route path='/'>
-                <p>404</p>
+                <NotFoundPage />
               </Route>
             </Switch>
           </React.Fragment>
