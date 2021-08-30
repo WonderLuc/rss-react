@@ -61,7 +61,7 @@ export default function Filters(): JSX.Element {
       </label>
       <label className="random" htmlFor="random">
         Random Cards
-        <input type="checkbox" id="random" onChange={(e) => onRandomCards(e)}/>
+        <input type="checkbox" id="random" checked={api.options.random} onChange={(e) => onRandomCards(e)}/>
       </label>
     </section>
   );
