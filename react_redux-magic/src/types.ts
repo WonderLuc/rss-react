@@ -11,20 +11,28 @@ export interface ICardContext {
 
 export enum Actions {
   CARDS_UPDATE = 'CARDS_UPDATE',
-  DOWNLOAD_CHANGE = 'DOWNLOAD_CHANGE',
+  DOWNLOAD_START = 'DOWNLOAD_START',
+  DOWNLOAD_SUCCES = 'DOWNLOAD_SUCCES',
+  DOWNLOAD_FAIL = 'DOWNLOAD_FAIL',
 }
 
 export interface UpdateAction {
   type: Actions.CARDS_UPDATE;
-  data: ICard[];
 }
 
-export interface DownloadUpdateAction {
-  type: Actions.DOWNLOAD_CHANGE;
-  data: boolean;
+export interface DownloadStartAction {
+  type: Actions.DOWNLOAD_START;
 }
 
-export type Action = UpdateAction | DownloadUpdateAction;
+export interface DownloadSuccesAction {
+  type: Actions.DOWNLOAD_SUCCES;
+}
+
+export interface DownloadFailAction {
+  type: Actions.DOWNLOAD_FAIL;
+}
+
+export type Action = UpdateAction | DownloadStartAction | DownloadSuccesAction | DownloadFailAction;
 
 export interface IStateContext {
   state: IState;
@@ -49,10 +57,8 @@ export interface IOptions {
 export interface IApi {
   url: string;
   options: IOptions;
-  isDownloaded: boolean;
   downolad: () => void;
   setOptions: (options: IOptions) => void;
-  setStatus: (status: boolean) => void;
 }
 
 export interface ICardInfo {

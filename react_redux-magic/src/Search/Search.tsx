@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { api, requestCards } from '../Api';
+import { useDispatch } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { api } from '../Api';
 import Filters from '../Filters/Filters';
-import { useCardsContext } from '../state/state';
+import { getCards } from '../state/middleware';
+import { IState } from '../types';
 import './style.scss';
 
 export default function Search(): JSX.Element {
-  const context = useCardsContext();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
 
   return (
@@ -22,7 +26,7 @@ export default function Search(): JSX.Element {
               name,
             });
           } else if (api.options.name) delete api.options.name;
-          requestCards(context, api);
+          (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
         }}>Search</button>
       </form>
       <Filters />

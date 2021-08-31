@@ -1,10 +1,14 @@
 import React from 'react';
-import { api, requestCards } from '../Api';
-import { useCardsContext } from '../state/state';
+import { useDispatch } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { api } from '../Api';
+import { getCards } from '../state/middleware';
+import { IState } from '../types';
 import './style.scss';
 
 export default function Filters(): JSX.Element {
-  const context = useCardsContext();
+  const dispatch = useDispatch();
 
   function onSpecificColor(e: React.ChangeEvent<HTMLSelectElement>): void {
     const color = e.target.value;
@@ -17,7 +21,7 @@ export default function Filters(): JSX.Element {
         colors: color,
       });
     }
-    requestCards(context, api);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }
 
   function onRandomCards(e: React.ChangeEvent<HTMLInputElement>) {
@@ -25,7 +29,7 @@ export default function Filters(): JSX.Element {
     api.setOptions({
       random: checked,
     });
-    requestCards(context, api);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }
 
   function onManaCost(e: React.ChangeEvent<HTMLInputElement>) {
@@ -39,7 +43,7 @@ export default function Filters(): JSX.Element {
         cmc: cost,
       });
     }
-    requestCards(context, api);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }
 
   return (

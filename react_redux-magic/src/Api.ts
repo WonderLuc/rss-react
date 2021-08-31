@@ -1,14 +1,11 @@
-import { UpdateCard, UpdateDownload } from './state/state';
 import {
-  IApi, ICard, IOptions, IStateContext,
+  IApi, ICard, IOptions,
 } from './types';
 
 export class Api implements IApi {
   options: IOptions;
 
   url: string;
-
-  isDownloaded: boolean;
 
   cards: ICard [];
 
@@ -19,16 +16,11 @@ export class Api implements IApi {
       contains: 'imageUrl',
     };
     this.url = url;
-    this.isDownloaded = false;
     this.cards = [];
   }
 
   setOptions(options: IOptions): void {
     this.options = { ...this.options, ...options };
-  }
-
-  setStatus(status: boolean): void {
-    this.isDownloaded = status;
   }
 
   async downolad(): Promise<void> {
@@ -37,7 +29,6 @@ export class Api implements IApi {
       const req = await fetch(reqUrl);
       if (req.ok) {
         const res = await req.json();
-        this.setStatus(true);
         this.cards = res.cards;
       } else if (req.status === 500) {
         this.downolad();
@@ -60,9 +51,3 @@ export class Api implements IApi {
 }
 
 export const api = new Api('https://api.magicthegathering.io/v1/cards');
-export async function requestCards(context: IStateContext, apiParam: Api): Promise<void> {
-  context.dispacth(UpdateDownload(true));
-  await apiParam.downolad();
-  context.dispacth(UpdateDownload(false));
-  context.dispacth(UpdateCard(api.cards));
-}

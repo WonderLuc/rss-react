@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
-import { api, requestCards } from '../Api';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
-import { useCardsContext } from '../state/state';
+import { getCards } from '../state/middleware';
+import { ICard, IState } from '../types';
 import './style.scss';
 
 export default function Cards(): JSX.Element {
-  const context = useCardsContext();
+  const state = useSelector((st: RootStateOrAny) => st.cardsState);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    requestCards(context, api);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }, []);
 
   return (
     <section className="cards">
-      {context.state.isDownload && <Loader />}
-      {context.state.cards.length ? context.state.cards.map((card) => <Card {...card} key={card.id} />) : ''}
-      {!context.state.cards.length && <h2>Sorry, there is no cards...</h2>}
+      {state.isDownload && <Loader />}
+      {state.cards.length ? state.cards.map((card: ICard) => <Card {...card} key={card.id} />) : ''}
+      {!state.cards.length && <h2>Sorry, there is no cards...</h2>}
     </section>
   );
 }

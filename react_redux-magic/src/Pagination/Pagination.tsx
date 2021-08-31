@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { api, requestCards } from '../Api';
-import { useCardsContext } from '../state/state';
+import { useDispatch } from 'react-redux';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { api } from '../Api';
+import { getCards } from '../state/middleware';
+import { IState } from '../types';
 import './style.scss';
 
 interface IPagainationProps {
@@ -9,7 +13,7 @@ interface IPagainationProps {
 
 export default function Pagination(props: IPagainationProps): JSX.Element {
   const [page, setPage] = useState(1);
-  const context = useCardsContext();
+  const dispatch = useDispatch();
 
   function flipPage(e: React.MouseEvent<HTMLButtonElement>, n: number): void {
     e.preventDefault();
@@ -18,9 +22,8 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
     api.setOptions({
       page: currentPage,
     });
-    api.setStatus(false);
-    requestCards(context, api);
     setPage(currentPage);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }
 
   function changeCardsOnPage(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -29,7 +32,7 @@ export default function Pagination(props: IPagainationProps): JSX.Element {
     api.setOptions({
       pageSize: value,
     });
-    requestCards(context, api);
+    (dispatch as ThunkDispatch<IState, unknown, AnyAction>)(getCards());
   }
 
   return (
