@@ -1,5 +1,5 @@
 import { AnyAction, applyMiddleware } from 'redux';
-import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import { api } from '../Api';
 import { IState } from '../types';
 import { StartDownload, SuccesDownload, UpdateCard } from './actions';

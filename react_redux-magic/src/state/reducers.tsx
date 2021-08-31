@@ -17,6 +17,8 @@ function CardsReducer(state: IState = initCardState, action: Action) {
       return { ...state, isDownload: false };
     case Actions.DOWNLOAD_FAIL:
       return { ...state, isDownload: false };
+    case Actions.GET_CARD_WITH_ID:
+      return { ...state, cards: state.cards.filter((card) => card.id === action.payload) };
     default:
       return state;
   }

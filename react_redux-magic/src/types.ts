@@ -14,6 +14,7 @@ export enum Actions {
   DOWNLOAD_START = 'DOWNLOAD_START',
   DOWNLOAD_SUCCES = 'DOWNLOAD_SUCCES',
   DOWNLOAD_FAIL = 'DOWNLOAD_FAIL',
+  GET_CARD_WITH_ID = 'GET_CARD_WITH_ID',
 }
 
 export interface UpdateAction {
@@ -32,7 +33,13 @@ export interface DownloadFailAction {
   type: Actions.DOWNLOAD_FAIL;
 }
 
-export type Action = UpdateAction | DownloadStartAction | DownloadSuccesAction | DownloadFailAction;
+export interface GetCardWithIDAction {
+  type: Actions.GET_CARD_WITH_ID;
+  payload: string;
+}
+
+export type Action = UpdateAction | DownloadStartAction
+| DownloadSuccesAction | DownloadFailAction | GetCardWithIDAction;
 
 export interface IStateContext {
   state: IState;

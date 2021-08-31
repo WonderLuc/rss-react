@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { api } from '../Api';
 import Card from '../Card/Card';
 import Loader from '../Loader/Loader';
+import { GetCardWitID } from '../state/actions';
 import { ICardInfo } from '../types';
 import './style.scss';
 import { manaCostCoverter } from './utils';
@@ -12,29 +15,14 @@ interface ICardPageParams {
 
 export default function CardDetail(): JSX.Element {
   const { cardID } = useParams<ICardPageParams>();
-  const [isDownloaded, setDownloading] = useState(false);
-  const [cardInfo, setInfo] = useState<ICardInfo>({});
-
-  async function getUser(): Promise<void> {
-    try {
-      const req = await fetch(`https://api.magicthegathering.io/v1/cards?id=${cardID}`);
-      if (req.ok) {
-        const res = await req.json();
-        setInfo(res.cards[0]);
-        setDownloading(true);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  useEffect(() => {
-    getUser();
-  }, []);
+  const dispatch = useDispatch();
+  dispatch(GetCardWitID(cardID));
+  const state = useSelector((st: RootStateOrAny) => st.cardsState);
+  const cardInfo: ICardInfo = state.cards[0];
 
   return (
     <article className="card-detail">
-      {!isDownloaded && <Loader />}
+      {state.isDownload && <Loader />}
       <section className="detail">
         <h2 className="detail__name">{cardInfo.name}</h2>
         <div className="detail-wrapper">
@@ -62,7 +50,7 @@ export default function CardDetail(): JSX.Element {
               </div>
             </div>
             <div className="textblock">
-              {cardInfo.text?.split('\n').map((chunck) => <p key={chunck.slice(0, 5)}>{chunck}</p>)}
+              {cardInfo.text?.split('\n').map((chunck: string) => <p key={chunck.slice(0, 5)}>{chunck}</p>)}
             </div>
           </div>
         </div>
