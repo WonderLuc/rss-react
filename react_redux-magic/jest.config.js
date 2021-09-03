@@ -2,4 +2,9 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  coverageDirectory: './src/',
+  moduleNameMapper : {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+  },
+  testEnvironment: "jsdom"
 };
