@@ -28,6 +28,7 @@ module.exports = ({develop}) => ({
   devtool: develop ? 'inline-source-map' : false, 
   entry: {
     main: './src/index.tsx',
+    'server/server': './server/server.tsx'
   },
   output: {
     filename: '[name].[contenthash].js',
