@@ -14,7 +14,6 @@ export default function App(): JSX.Element {
       <HashRouter >
         <React.Fragment>
           <Header />
-          {process.env.NODE_ENV === 'production' ? '' : <DevTools />}
           <Switch>
             <Route exact path="/">
               <Home />
