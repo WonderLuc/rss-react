@@ -1,0 +1,38 @@
+.header{
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background: #c5cdd8;;
+}
+
+.nav-list{
+  display: flex;
+  align-items: center;
+  list-style: none;
+  height: 100%;
+  transition: all 0.5s;
+  
+  &__item{
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    a{
+      padding: 12px;
+      height: 100%;
+      color: #242121;
+      text-decoration: none;
+    }
+
+    .active{ 
+      color: yellowgreen;
+      background: #242121;
+      text-decoration: underline;
+    }
+
+    &:hover{
+      transform: scale(1.1);
+      transition: all 0.3s;
+    }
+  }
+}

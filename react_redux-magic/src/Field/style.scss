@@ -1,0 +1,9 @@
+.field{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 30px 10px;
+    background: url('../../public/background.jpg');
+    background-size: cover;
+    min-height: 100vh;
+}

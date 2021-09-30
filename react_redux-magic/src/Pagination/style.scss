@@ -1,0 +1,40 @@
+.pagination{
+    display: flex;
+    flex-direction: column;
+
+    &__pageSize{
+        align-self: flex-end;
+        margin-bottom: 10px;
+
+        #pageSize{
+            margin-left: 10px;
+            width: 30px;
+            padding: 5px;
+        }
+    }
+}
+
+.page-counter{
+    align-self: center;
+    display: flex;
+    margin-top: 20px;
+
+    &__prev, &__next{
+        margin: 0 10px;
+        padding: 0 10px;
+        outline: none;
+        background-color: white;
+
+        &:hover{
+            background: yellowgreen;
+            cursor: pointer;
+        }
+    }
+
+    &__number{
+        font-weight: bold;
+        font-family: monospace;
+        font-size: 1.5rem;
+        color: white;
+    }
+}
