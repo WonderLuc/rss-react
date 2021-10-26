@@ -1,5 +1,5 @@
 import React from 'react';
-import { IBook } from '../Books/mockData';
+import { IBook } from '../types';
 import './style.scss';
 
 export default function Preview(props: IBook): JSX.Element {

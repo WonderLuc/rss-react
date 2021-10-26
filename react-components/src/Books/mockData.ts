@@ -1,11 +1,4 @@
-export interface IBook{
-  name: string;
-  author: string;
-  img: string;
-  likes: number;
-  comments: number;
-  price: number;
-}
+import { IBook } from '../types';
 
 export const data: IBook[] = [
   {
