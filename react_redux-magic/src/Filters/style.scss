@@ -1,0 +1,46 @@
+.filters{
+    display: flex;
+    justify-content: center;
+    color: white;
+
+    label{
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+}
+
+#color, #cmc, #random{
+    margin: 10px;
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+}
+
+#cmc{
+    width: 30px;
+}
+
+#random{
+    position: absolute;
+    left: 100%;
+
+    &:checked::after{
+        background-color: yellowgreen;
+    }
+    
+    &::after{
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+.random{
+    position: relative;
+}
